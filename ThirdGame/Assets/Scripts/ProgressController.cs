@@ -35,11 +35,15 @@ public class ProgressController : MonoBehaviour
         fireAnimator = GetComponentInChildren<Animator>();
         ProgressInit();
     }
-    
+
+    private void OnEnable()
+    {
+        ProgressInit();
+    }
+
     private void OnDisable()
     {
-        ShotFinished = null;
-        ProgressInit();
+        // ShotFinished = null; //TODO:后续改进
     }
     private void Update()
     {

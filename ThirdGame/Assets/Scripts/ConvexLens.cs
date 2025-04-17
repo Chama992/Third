@@ -27,6 +27,8 @@ public class ConvexLens : MonoBehaviour,IDragHandler
     {
         minPoint = _minPoint;
         maxPoint = _maxPoint;
+        // maxPoint = new Vector3(500,400,0);
+        // minPoint = new Vector3(-500,-400,0);
         Debug.Log("minPoint: " + minPoint + "maxPoint: " + maxPoint );
     }
     
@@ -50,16 +52,15 @@ public class ConvexLens : MonoBehaviour,IDragHandler
     public void OnDrag(PointerEventData eventData)
     {
         Vector3 curPoint = eventData.position;
-        Debug.Log("mousepos: " + curPoint);
+        // Debug.Log("mousepos: " + curPoint);
         curPoint.x = Mathf.Clamp(curPoint.x, minPoint.x, maxPoint.x);
         curPoint.y = Mathf.Clamp(curPoint.y, minPoint.y, maxPoint.y);
-        
-        Debug.Log("afterclamp: " + curPoint);
-        curPoint.x -= Screen.width * 0.5f;
-        curPoint.y -= Screen.height * 0.5f;
-        
+        // Debug.Log("minPoint: " + minPoint + "maxPoint: " + maxPoint );
+        // Debug.Log("afterclamp: " + curPoint);
+        curPoint.x = (curPoint.x - Screen.width *0.5f)/(Screen.width*0.5f - minPoint.x) * 500;
+        curPoint.y = (curPoint.y - Screen.height * 0.5f) / (Screen.height * 0.5f - minPoint.y) * 400;
         transform.localPosition = curPoint;
-        Debug.Log("last: " + curPoint);
+        // Debug.Log("last: " + curPoint);
     }
     private void OnTriggerStay2D(Collider2D other)
     {
